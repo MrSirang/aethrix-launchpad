@@ -249,7 +249,8 @@ function Services() {
 
 function Workflow() {
   const [active, setActive] = useState(0);
-  const selected = workflowLevels[active];
+  const selected = workflowLevels[active] ?? workflowLevels[0];
+  if (!selected) return null;
   return (
     <section id="workflow" className="page-section workflow-section">
       <SectionHeading eyebrow="How we work" title="Creativity, made dependable." copy="Three connected levels turn ambitious ideas into considered, consistent, and launch-ready work." />
