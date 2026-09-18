@@ -257,9 +257,9 @@ function Workflow() {
       <div className="workflow-shell">
         <div className="workflow-tabs" role="tablist" aria-label="Workflow levels">
           {workflowLevels.map((level, index) => (
-            <button key={level.label} className={cn(active === index && "active")} onClick={() => setActive(index)}>
+            <Button variant="ghost" key={level.label} className={cn(active === index && "active")} onClick={() => setActive(index)}>
               <span>{level.label}</span><strong>{level.title}</strong><ChevronRight />
-            </button>
+            </Button>
           ))}
         </div>
         <div className="workflow-detail">
@@ -285,7 +285,7 @@ function Industries() {
       <div className="industries-grid">
         {industries.map((industry, index) => {
           const Icon = industry.icon;
-          return <button key={industry.name} onClick={() => setActive(index)} className={cn("industry-item", active === index && "active")}><span className="industry-index">0{index + 1}</span><Icon /><span><strong>{industry.name}</strong><small>{industry.copy}</small></span><ArrowRight /></button>;
+          return <Button variant="ghost" key={industry.name} onClick={() => setActive(index)} className={cn("industry-item", active === index && "active")}><span className="industry-index">0{index + 1}</span><Icon /><span><strong>{industry.name}</strong><small>{industry.copy}</small></span><ArrowRight /></Button>;
         })}
       </div>
     </section>
@@ -345,8 +345,8 @@ function InquiryForm() {
         <div className="form-progress">
           {[1, 2, 3].map((item) => <div key={item} className={cn(item <= step && "active")}><span>{item < step ? <Check /> : item}</span><small>{["Services", "Scope", "Details"][item - 1]}</small></div>)}
         </div>
-        {step === 1 && <div className="form-step"><div className="form-title"><span>01</span><div><h3>What can we create together?</h3><p>Select every service your project may need.</p></div></div><div className="choice-grid services-choice">{services.map((service) => { const Icon = service.icon; const checked = form.services.includes(service.id); return <button type="button" key={service.id} className={cn("choice-card", checked && "selected")} onClick={() => toggleService(service.id)}><Icon /><span>{service.title}</span><i>{checked && <Check />}</i></button>; })}</div></div>}
-        {step === 2 && <div className="form-step"><div className="form-title"><span>02</span><div><h3>Define the project scope.</h3><p>A range helps us recommend the right route.</p></div></div><fieldset><legend>Estimated budget</legend><div className="choice-grid compact">{budgets.map((budget) => <button type="button" key={budget} className={cn("choice-card", form.budget === budget && "selected")} onClick={() => setForm({ ...form, budget })}>{budget}<i>{form.budget === budget && <Check />}</i></button>)}</div></fieldset><fieldset><legend>Ideal timeline</legend><div className="choice-grid compact">{timelines.map((timeline) => <button type="button" key={timeline} className={cn("choice-card", form.timeline === timeline && "selected")} onClick={() => setForm({ ...form, timeline })}>{timeline}<i>{form.timeline === timeline && <Check />}</i></button>)}</div></fieldset></div>}
+        {step === 1 && <div className="form-step"><div className="form-title"><span>01</span><div><h3>What can we create together?</h3><p>Select every service your project may need.</p></div></div><div className="choice-grid services-choice">{services.map((service) => { const Icon = service.icon; const checked = form.services.includes(service.id); return <Button variant="ghost" type="button" key={service.id} className={cn("choice-card", checked && "selected")} onClick={() => toggleService(service.id)}><Icon /><span>{service.title}</span><i>{checked && <Check />}</i></Button>; })}</div></div>}
+        {step === 2 && <div className="form-step"><div className="form-title"><span>02</span><div><h3>Define the project scope.</h3><p>A range helps us recommend the right route.</p></div></div><fieldset><legend>Estimated budget</legend><div className="choice-grid compact">{budgets.map((budget) => <Button variant="ghost" type="button" key={budget} className={cn("choice-card", form.budget === budget && "selected")} onClick={() => setForm({ ...form, budget })}>{budget}<i>{form.budget === budget && <Check />}</i></Button>)}</div></fieldset><fieldset><legend>Ideal timeline</legend><div className="choice-grid compact">{timelines.map((timeline) => <Button variant="ghost" type="button" key={timeline} className={cn("choice-card", form.timeline === timeline && "selected")} onClick={() => setForm({ ...form, timeline })}>{timeline}<i>{form.timeline === timeline && <Check />}</i></Button>)}</div></fieldset></div>}
         {step === 3 && <div className="form-step"><div className="form-title"><span>03</span><div><h3>Tell us where to reach you.</h3><p>A few details, then your project is ready for review.</p></div></div><div className="field-grid"><div><Label htmlFor="name">Full name</Label><Input id="name" maxLength={100} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your name" /></div><div><Label htmlFor="email">Work email</Label><Input id="email" type="email" maxLength={255} value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="you@company.com" /></div><div className="full-field"><Label htmlFor="company">Company / brand name</Label><Input id="company" maxLength={100} value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} placeholder="Your company" /></div><div className="full-field"><Label htmlFor="brief">Project brief</Label><Textarea id="brief" maxLength={1200} value={form.brief} onChange={(e) => setForm({ ...form, brief: e.target.value })} placeholder="What are you creating, who is it for, and what should it achieve?" /></div></div></div>}
         {error && <p className="form-error" role="alert">{error}</p>}
         <div className="form-actions">{step > 1 ? <Button type="button" variant="ghost" onClick={() => { setError(""); setStep(step - 1); }}><ChevronLeft /> Back</Button> : <span />}{step < 3 ? <Button type="button" onClick={next}>Continue <ChevronRight /></Button> : <Button type="submit">Send Inquiry <ArrowRight /></Button>}</div>
