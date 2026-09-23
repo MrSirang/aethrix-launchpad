@@ -55,3 +55,8 @@ cd <repository-name>
 npm i
 npm run dev
 ```
+
+Command to Run Locally 
+npm install     # downloads the dependencies (first time only)
+npm run dev     # starts the local dev server
+
